@@ -1,0 +1,17 @@
+name: Tag Release Workflow
+
+on:
+  create:
+    tags:
+      - '*'  # This means the workflow will run for any new tag
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Print Tag Name
+        run: echo "New tag created: $GITHUB_REF"
