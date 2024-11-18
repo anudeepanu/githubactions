@@ -16,4 +16,4 @@ jobs:
         run: echo "New tag created"
 
       - name: checking the prod deploy
-        run: echo "testingg"
+        run: echo "testinggg"
