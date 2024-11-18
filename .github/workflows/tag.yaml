@@ -6,7 +6,7 @@ on:
       - '*'  # This means the workflow will run for any new tag
 
 jobs:
-  build:
+  prod:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
