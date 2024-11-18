@@ -15,3 +15,6 @@ jobs:
 
       - name: Print Tag Name
         run: echo "New tag created"
+
+      - name: checking the prod deploy
+        run: echo "testing"
