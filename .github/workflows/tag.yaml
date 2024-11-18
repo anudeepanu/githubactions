@@ -1,7 +1,7 @@
 name: Tag Release Workflow
 
 on:
-  create:
+  push:
     tags:
       - '*'  # This means the workflow will run for any new tag
 
