@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-sdk:
-    if: github.head_ref == 'hotfix/*'
+    if: startsWith(github.head_ref, 'hotfix/')
     runs-on: ubuntu-latest  
     steps:
       - run: echo "Build SDK..."
