@@ -9,4 +9,6 @@ jobs:
     if: github.head_ref == 'hotfix/*'
     runs-on: ubuntu-latest  
     steps:
-      - run: echo "Build SDK..."
+      - run: |
+            echo "The Title of your PR is ${{ github.event.pull_request.title }}"
+            echo "Build SDK..."
