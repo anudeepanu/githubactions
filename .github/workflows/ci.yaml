@@ -1,16 +1,12 @@
-name: Echo Hi
+name: Build-SDK
 
 on:
-  push:  # Triggers on every push to the repository
-    branches:
-      - 'main'  # Listen to pushes on all branches
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  say_hi:
-    runs-on: ubuntu-latest
-
+  build-sdk:
+    if: github.head_ref == 'hotfix/*'
+    runs-on: ubuntu-latest  
     steps:
-      - name: Print Hello
-        run: echo "Helloo"
-
-        
+      - run: echo "Build SDK..."
