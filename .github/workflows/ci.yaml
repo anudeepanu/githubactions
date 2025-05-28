@@ -2,11 +2,17 @@ name: Build-SDK
 
 on:
   pull_request:
+    types: [opened, edited]
     branches: [ main ]
 
 jobs:
   build-sdk:
-    if: startsWith(github.head_ref, 'hotfix/')
-    runs-on: ubuntu-latest  
+    if: |
+      startsWith(github.head_ref, 'hotfix/') &&
+      !contains(github.event.pull_request.title,'crea')
+    runs-on: ubuntu-latest
     steps:
-      - run: echo "Build SDK..."
+      - run: |
+            echo "The Title of your PR is ${{ github.event.pull_request.title }}"
+            echo "Build SDK..."
+            echo "This PR is opened by ${{ github.event.pull_request.user.login }} ."
