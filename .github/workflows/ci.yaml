@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-sdk:
+  test-pr:
     if: |
       startsWith(github.head_ref, 'hotfix/') &&
       !contains(github.event.pull_request.title,'crea')
@@ -14,5 +14,5 @@ jobs:
     steps:
       - run: |
             echo "The Title of your PR is ${{ github.event.pull_request.title }}"
-            echo "Build SDK..."
             echo "This PR is opened by ${{ github.event.pull_request.user.login }} ."
+            echo "PR Link: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
