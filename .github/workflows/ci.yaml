@@ -7,8 +7,10 @@ on:
 
 jobs:
   build-sdk:
-    if: github.head_ref == 'hotfix/*'
-    runs-on: ubuntu-latest  
+    if: |
+      startsWith(github.head_ref, 'hotfix/') &&
+      !contains(github.event.pull_request.title,'crea')
+    runs-on: ubuntu-latest
     steps:
       - run: |
             echo "The Title of your PR is ${{ github.event.pull_request.title }}"
