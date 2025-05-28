@@ -1,20 +1,31 @@
-name: Build-SDK
-
+name: Notify Slack on Hotfix PR
+ 
 on:
   pull_request:
-    types: [edited, opened]
-    branches: [ main ]
-
+    types: [opened, edited, synchronize]
+    branches:
+      - main
+ 
 jobs:
-  test-pr:
+  gathering_PR_details:
     if: |
-      startsWith(github.head_ref, 'hotfix/') &&
-      !contains(github.event.pull_request.title,'crea')
+      startsWith(github.head_ref, 'hotfix/') && !contains(github.event.pull_request.title, 'WIP')
     runs-on: ubuntu-latest
+    outputs:
+      PR_URL: ${{ steps.set-env.outputs.PR_URL }}
+      PR_TITLE: ${{ steps.set-env.outputs.PR_TITLE }}
+      AUTHOR_NAME: ${{ steps.set-env.outputs.AUTHOR_NAME }}
     steps:
-      - run: |
-            echo "The Title of your PR is ${{ github.event.pull_request.title }}"
-            echo "This PR is opened by ${{ github.event.pull_request.user.login }} ."
-            echo "PR Link: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
-            echo "https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}" > PR_LINK
-            echo $PR_LINK
+      - name: Print PR info and set output
+        id: set-env
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          AUTHOR_NAME="${{ github.event.pull_request.user.login }}"
+          PR_URL="https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
+          echo "The Title of your PR is $PR_TITLE"
+          echo "This PR is opened by $AUTHOR_NAME."
+          echo "PR Link: $PR_URL"
+ 
+          echo "PR_URL=$PR_URL" >> $GITHUB_OUTPUT
+          echo "PR_TITLE=$PR_TITLE" >> $GITHUB_OUTPUT
+          echo "AUTHOR_NAME=$AUTHOR_NAME" >> $GITHUB_OUTPUT
