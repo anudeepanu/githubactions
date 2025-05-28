@@ -20,3 +20,5 @@ jobs:
             cat PR_LINK
             echo "${{ github.event.pull_request.user.login }}" > author_name
             echo "$author_name"
+            AUTHOR_NAME=${{ github.event.pull_request.user.login }}
+            echo "Author Name: $AUTHOR_NAME"
