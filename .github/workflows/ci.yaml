@@ -3,30 +3,35 @@ name: Build-SDK
 on:
   pull_request:
     types: [edited, opened, synchronize]
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test-pr:
     if: |
       startsWith(github.head_ref, 'hotfix/') &&
-      !contains(github.event.pull_request.title,'crea')
+      !contains(github.event.pull_request.title, 'crea')
     runs-on: ubuntu-latest
+    outputs:
+      pr_url: ${{ steps.set-env.outputs.pr_url }}
     steps:
-      - run: |
-            echo "The Title of your PR is ${{ github.event.pull_request.title }}"
-            echo "This PR is opened by ${{ github.event.pull_request.user.login }} ."
-            echo "PR Link: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
-            echo "https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}" > PR_LINK
-            AUTHOR_NAME=${{ github.event.pull_request.user.login }}
-            echo "Author Name: $AUTHOR_NAME"
-            echo "PR_URL=https://github.com/${GITHUB_REPOSITORY}/pull/${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+      - name: Print PR info and set output
+        id: set-env
+        run: |
+          echo "The Title of your PR is ${{ github.event.pull_request.title }}"
+          echo "This PR is opened by ${{ github.event.pull_request.user.login }}."
+          echo "PR Link: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
+          echo "https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}" > PR_LINK
+          AUTHOR_NAME=${{ github.event.pull_request.user.login }}
+          echo "Author Name: $AUTHOR_NAME"
+          echo "pr_url=https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
+
   print-env:
     needs: test-pr
     runs-on: ubuntu-latest
     steps:
       - run: |
-             echo "$PR_URL"
-    
+          echo "PR URL from previous job: ${{ needs.test-pr.outputs.pr_url }}"
+
   
   
             
