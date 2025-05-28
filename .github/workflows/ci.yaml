@@ -21,8 +21,7 @@ jobs:
         run: |
           PR_TITLE="${{ github.event.pull_request.title }}"
           AUTHOR_NAME="${{ github.event.pull_request.user.login }}"
-PR_URL="https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
- 
+          PR_URL="https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
           echo "The Title of your PR is $PR_TITLE"
           echo "This PR is opened by $AUTHOR_NAME."
           echo "PR Link: $PR_URL"
