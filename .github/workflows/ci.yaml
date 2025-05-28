@@ -2,7 +2,7 @@ name: Build-SDK
 
 on:
   pull_request:
-    types: [opened, edited]
+    types: [edited]
     branches: [ main ]
 
 jobs:
