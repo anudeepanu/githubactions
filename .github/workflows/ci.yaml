@@ -19,7 +19,6 @@ jobs:
             echo "https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}" > PR_LINK
             AUTHOR_NAME=${{ github.event.pull_request.user.login }}
             echo "Author Name: $AUTHOR_NAME"
-            echo "The email of the pusher: ${{ github.event.pusher.email }}"
             echo "PR_URL=https://github.com/${GITHUB_REPOSITORY}/pull/${{ github.event.pull_request.number }}" >> $GITHUB_ENV
   print-env:
     needs: test-pr
