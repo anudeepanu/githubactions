@@ -17,6 +17,6 @@ jobs:
             echo "This PR is opened by ${{ github.event.pull_request.user.login }} ."
             echo "PR Link: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
             echo "https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}" > PR_LINK
-            echo "$PR_LINK"
+            cat PR_LINK
             echo "${{ github.event.pull_request.user.login }}" > author_name
             echo "$author_name"
