@@ -22,3 +22,4 @@ jobs:
             echo "$author_name"
             AUTHOR_NAME=${{ github.event.pull_request.user.login }}
             echo "Author Name: $AUTHOR_NAME"
+            echo "The email of the pusher: ${{ github.event.pusher.email }}"
